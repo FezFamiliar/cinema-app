@@ -14,4 +14,15 @@
             </div>
         </div>
     </div>
+
+    <div class="py-12">
+        @foreach ($movies as $key => $movie)
+            
+            <p>Title: {{ $movie['title'] ?? ''}}</p>
+            <p>Year: {{ $movie['release_date'] ?? ''}}</p>
+            <p>vote: {{ $movie['vote_count'] ?? ''}}</p>
+            <p>Description: {{ $movie['overview'] ?? ''}}</p>
+            <img src="https://image.tmdb.org/t/p/w500/{{ $movie['poster_path'] ?? ''}}" alt="movie_poster">
+        @endforeach
+    </div>
 </x-app-layout>

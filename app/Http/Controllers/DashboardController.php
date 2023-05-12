@@ -8,9 +8,13 @@ class DashboardController extends Controller
 {
     public function index() {
         
-        print_r($this->getMovies());
-        die();
-        return view('dashboard');
+        $movies = $this->getMovies();
+        $movies = json_decode($movies, true);
+        // echo '<pre>';
+        // print_r( $movies['results']);
+        // echo '</pre>';
+        // die();
+        return view('dashboard', ['movies' => $movies['results']]);
     }
 
 
