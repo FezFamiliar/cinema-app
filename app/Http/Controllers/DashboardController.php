@@ -17,6 +17,10 @@ class DashboardController extends Controller
         return view('dashboard', ['movies' => $movies['results']]);
     }
 
+    public function movie() {
+        
+        return view('movie');
+    }
 
     public function getMovies() {
         $curl = curl_init();
