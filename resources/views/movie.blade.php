@@ -6,5 +6,7 @@
     </x-slot>
 
 
-    <div id="root"></div>
+    <div id="app">
+        <App></App>
+    </div>
 </x-app-layout>
