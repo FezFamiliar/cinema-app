@@ -1,13 +1,45 @@
 <template>
-    <div class="container">
-        <h1>Hi, im from seat</h1>
+    <div @click="SelectSeat()" class="seat" :class="{selected: (this.isReserved) ? this.isReserved : this.isSelected}" :d-row="row" :d-col="col">
+
     </div>
 </template>
 
+
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
+    export default{
+        name: 'Seat',
+        components: {},
+        props: {
+            isReserved: Boolean,
+            row: Number,
+            col: String
+        },
+        methods: {
+            SelectSeat() {
+                this.isSelected = !this.isSelected
+            }
+        },
+        data() {
+            return {
+                isSelected: false
+            }
         }
     }
 </script>
+
+
+
+<style scoped>
+    .seat {
+        display: inline-block;
+        width: 50px;
+        height:50px;    
+        background-color: green;
+    }
+
+    .selected {
+        background-color: red;
+    }
+
+
+</style>

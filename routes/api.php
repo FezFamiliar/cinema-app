@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\API\SeatController;
+use App\Http\Controllers\API\MovieController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/seats', [SeatController::class, 'index'])->name('seats');
+Route::post('/reserve', [SeatController::class, 'store'])->name('reserve');
+Route::get('/movieData/{id}', [MovieController::class, 'index']);

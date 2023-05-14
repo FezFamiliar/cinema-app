@@ -1,15 +1,16 @@
 <template>
     <div class="container">
-        <h1>Im from App.vue</h1>
-        <seat></seat>
+        <reservation></reservation>
     </div>
 </template>
 
 <script>
     import Seat from './components/Seat.vue'
+    import Reservation from './components/Reservation.vue';
     export default {
         components: {
-            Seat
+            Seat,
+            Reservation
         },
         mounted() {
             console.log('Component mounted.')
