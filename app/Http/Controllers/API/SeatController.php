@@ -18,7 +18,7 @@ class SeatController extends Controller
         return SeatResource::make(Seat::all());
     }
 
-   /* public function store(Request $request) 
+    public function store(Request $request) 
     {
         $seats = $request->seats;   
         $movieId = $request->movieId;
@@ -59,5 +59,5 @@ class SeatController extends Controller
             
         }
         return response()->json(['reservedSeats' => $response]);
-    }*/
+    }
 }

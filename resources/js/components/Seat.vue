@@ -34,6 +34,7 @@
         display: inline-block;
         width: 50px;
         height:50px;    
+        margin: 2px;
         background-color: green;
     }
 

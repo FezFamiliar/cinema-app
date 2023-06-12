@@ -24,10 +24,11 @@
                 </tr>
             </tbody>
         </table> 
-        <button v-if="currentSeats.length > 0" class="btn btn-primary" @click.prevent="submitReservation">Reserve Seat</button>
+        <button v-if="currentSeats.length > 0" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" @click.prevent="submitReservation">Reserve Seat</button>
         <p v-if="errorMsg">Something went wrong!</p>
         <p v-if="responseMessage">{{ this.responseMessage }}</p>
         </div>
+        <div  class="screen"></div>
     </div>
 </template>
 
@@ -96,6 +97,9 @@
                 } else {
                     this.currentSeats.splice(idx)
                 }
+
+
+                console.log(this.currentSeats)
             },
             submitReservation() {
                 axios.post("api/reserve", {seats: this.currentSeats, movieId: this.movieId})
@@ -114,3 +118,13 @@
     }
 
 </script>
+
+<style scoped>
+
+.screen {
+  width: 10px;
+  height: 500px;
+  background-color: black;
+  margin-top: 70px;
+}
+</style>

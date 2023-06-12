@@ -11,9 +11,6 @@
         components: {
             Seat,
             Reservation
-        },
-        mounted() {
-            console.log('Component mounted.')
         }
     }
 </script>
