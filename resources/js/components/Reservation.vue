@@ -19,7 +19,7 @@
             <tbody>
                 <tr v-for="i in this.seats.nr_rows" :key="i">
                     <td v-for="j in this.seats.columns" :key="j">
-                        <Seat :row="i" :col="j.column" @click="startReservation(i, j.column)" :isReserved="checkIfSeatIsTaken(i, j.column)"/>  
+                        <Seat :row="i" :col="j.column" :isReserved="checkIfSeatIsTaken(i, j.column)" @click="startReservation(i, j.column)" />  
                     </td>
                 </tr>
             </tbody>
@@ -40,20 +40,20 @@
         components: {Seat},
 
         mounted() {
-           // this.getReservedSeats()
+            this.getMovieId()
+            this.getReservedSeats()
             this.getMovieData()
             this.getSeats()
-            //console.log(movieData);
         },
         data() {
             return {
-                reservedSeats: [],
-                movieId: this.getMovieId(),
+                movieId: null,
                 errorMsg: null,
                 responseMessage: null,
-                currentSeats: [],
                 loading: false,
                 seats: [],
+                reservedSeats: [],
+                currentSeats: [],
                 movieData: {}
             };
         },
@@ -66,7 +66,7 @@
                 })
             },
             getMovieId () {
-                return window.location.href.split("/").slice(-1)[0];
+                this.movieId = window.location.href.split("/").slice(-1)[0];
             },
             getSeats() {
               
@@ -77,7 +77,7 @@
               })
           },
             getReservedSeats() {
-                axios.get("/api/reservedSeats")
+                axios.get("/api/reservedSeats/" + this.movieId)
                 .then(response => {
                     this.reservedSeats = response.data.reservedSeats
                 })
@@ -86,6 +86,10 @@
           
             startReservation(i, j) {
                 
+                if (this.checkIfSeatIsTaken(i, j)) {
+                    return
+                }
+
                 var obj = {
                     'row': i,
                     'col': j
@@ -98,11 +102,9 @@
                     this.currentSeats.splice(idx)
                 }
 
-
-                console.log(this.currentSeats)
             },
             submitReservation() {
-                axios.post("api/reserve", {seats: this.currentSeats, movieId: this.movieId})
+                axios.post("/api/reserve", {seats: this.currentSeats, movieId: this.movieId})
                 .then(response => {
                     this.responseMessage = response.data.message
                 }).catch(error => {

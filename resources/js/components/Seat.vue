@@ -1,5 +1,5 @@
 <template>
-    <div @click="SelectSeat()" class="seat" :class="{selected: (this.isReserved) ? this.isReserved : this.isSelected}" :d-row="row" :d-col="col">
+    <div @click="SelectSeat()" class="seat" :class="{selected: (this.isReserved) ? this.isReserved : this.isSelected}" :d-row="row" :d-col="col" :is-reserved="isReserved">
 
     </div>
 </template>
@@ -40,6 +40,7 @@
 
     .selected {
         background-color: red;
+        cursor: not-allowed;
     }
 
 

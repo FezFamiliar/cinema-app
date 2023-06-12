@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Seat;
-//use App\Models\Movie;
-//use App\Models\Reservation;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
-//use App\Models\ReservationSeat;
+use App\Models\ReservationSeat;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SeatResource;
-//use App\Http\Resources\MovieResource;
+use Illuminate\Support\Facades\Auth;
 
 class SeatController extends Controller
 {
@@ -46,13 +45,14 @@ class SeatController extends Controller
         return response()->json(['message' => 'Successfully reserved seat!']);
     }
 
-    public function reservedSeats() 
+    public function reservedSeats(Request $request) 
     {
-        $reservation = Reservation::where('user_id', 1)->first();
+        
+        $movieId = $request->id;
+        $reservation = Reservation::where('user_id', 1)->where('movie_id', $movieId)->first();
         $response = [];
         if($reservation)
         {
-            $response = [];
             foreach($reservation->seats as $reservedSeats) {
                 $response[] = $reservedSeats;
             }

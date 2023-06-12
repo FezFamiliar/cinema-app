@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/seats', [SeatController::class, 'index'])->name('seats');
-Route::post('/reserve', [SeatController::class, 'store'])->name('reserve');
+Route::post('/reserve', [SeatController::class, 'store']);
 Route::get('/movieData/{id}', [MovieController::class, 'index']);
+Route::get('/reservedSeats/{id}', [SeatController::class, 'reservedSeats']);
