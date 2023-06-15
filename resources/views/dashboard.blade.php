@@ -4,7 +4,9 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+    <div class="search-container">
+      <input type="text" placeholder="Search">
+    </div>
     <div class="grid grid-cols-3 gap-4 mx-auto mt-5" style="width:1200px;">
         @foreach ($movies as $key => $movie)
             <div class="max-w-sm rounded overflow-hidden shadow-lg p-4 w-400">
