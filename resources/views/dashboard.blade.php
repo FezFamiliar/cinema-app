@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-
     <div class="grid grid-cols-3 gap-4 mx-auto mt-5" style="width:1200px;">
         @foreach ($movies as $key => $movie)
             <div class="max-w-sm rounded overflow-hidden shadow-lg p-4 w-400">
@@ -17,6 +16,7 @@
                     {{ $movie['overview'] ?? ''}}
                   </p>
                 </div>
+                 
                 <div class="px-6 pt-4 pb-2 text-center">
                   <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ isset($movie['release_date']) ? substr($movie['release_date'], 0, 4) : '2017'}}</span>
                   <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ $movie['vote_count'] ?? ''}}</span>

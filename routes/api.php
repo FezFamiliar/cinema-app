@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\MovieController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +23,4 @@ Route::get('/seats', [SeatController::class, 'index'])->name('seats');
 Route::post('/reserve', [SeatController::class, 'store']);
 Route::get('/movieData/{id}', [MovieController::class, 'index']);
 Route::get('/reservedSeats/{id}', [SeatController::class, 'reservedSeats']);
+Route::get('/auditoriums', [MovieController::class, 'getAuditoriumMovieMap']);

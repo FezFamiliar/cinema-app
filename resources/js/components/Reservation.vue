@@ -1,6 +1,8 @@
 <template>
     <div class="flex" style="justifyContent: space-around;">
         <div class="rounded overflow-hidden shadow-lg p-4" style="width:600px;">
+
+            <p>Auditorium: {{ this.auditoriums[this.movieId] }}</p>
             <img :src="'https://image.tmdb.org/t/p/w342' + movieData.poster_path" alt="movie_poster" style="height:400px;margin: auto;">
             <div class="px-6 py-4 overflow-hidden">
                 <div class="font-bold text-xl mb-2 text-center">{{ movieData.title }}</div>
@@ -43,7 +45,9 @@
             this.getMovieId()
             this.getReservedSeats()
             this.getMovieData()
+            this.getAuditoriums()
             this.getSeats()
+            
         },
         data() {
             return {
@@ -54,7 +58,8 @@
                 seats: [],
                 reservedSeats: [],
                 currentSeats: [],
-                movieData: {}
+                movieData: {},
+                auditoriums: []
             };
         },
         methods: {
@@ -82,6 +87,13 @@
                     this.reservedSeats = response.data.reservedSeats
                 })
 
+            },
+
+            getAuditoriums() {
+                axios.get("/api/auditoriums/")
+                .then(response => {
+                    this.auditoriums = response.data
+                })
             },
           
             startReservation(i, j) {

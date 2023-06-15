@@ -126,6 +126,7 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'MOVIE_DB_API_KEY' => env('MOVIE_DB_API_KEY'),
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
