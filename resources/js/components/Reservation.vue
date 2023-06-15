@@ -1,8 +1,6 @@
 <template>
     <div class="flex" style="justifyContent: space-around;">
         <div class="rounded overflow-hidden shadow-lg p-4" style="width:600px;">
-
-            <p>Auditorium: {{ this.auditoriums[this.movieId] }}</p>
             <img :src="'https://image.tmdb.org/t/p/w342' + movieData.poster_path" alt="movie_poster" style="height:400px;margin: auto;">
             <div class="px-6 py-4 overflow-hidden">
                 <div class="font-bold text-xl mb-2 text-center">{{ movieData.title }}</div>
@@ -15,6 +13,7 @@
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ movieData.vote_count }}</span>
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ movieData.vote_average }}/10</span>
             </div>
+            <p :v-if="auditoriums.length > 0 " class="text-center">Auditorium: {{ auditoriums[this.movieId] }}</p>
         </div>
         <div class="p-4">
             <table class="table-auto">
@@ -29,6 +28,7 @@
         <button v-if="currentSeats.length > 0" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" @click.prevent="submitReservation">Reserve Seat</button>
         <p v-if="errorMsg">Something went wrong!</p>
         <p v-if="responseMessage">{{ this.responseMessage }}</p>
+        
         </div>
         <div  class="screen"></div>
     </div>
