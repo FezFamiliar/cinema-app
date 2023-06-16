@@ -116,7 +116,8 @@
 
             },
             submitReservation() {
-                axios.post("/api/reserve", {seats: this.currentSeats, movieId: this.movieId})
+
+                axios.post("/api/reserve", {seats: this.currentSeats, movieId: this.movieId, auditorium: this.auditoriums[this.movieId]})
                 .then(response => {
                     this.responseMessage = response.data.message
                 }).catch(error => {

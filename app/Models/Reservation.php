@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Reservation extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'movie_id'];
+    protected $fillable = ['user_id', 'movie_id', 'auditorium'];
     public $timestamps = true;
     
     public function seats()

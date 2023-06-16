@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('movie_id');
+            $table->string('auditorium');
             $table->timestamps();
         });
     }

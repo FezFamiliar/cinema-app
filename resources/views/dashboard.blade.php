@@ -5,9 +5,48 @@
         </h2>
     </x-slot>
     <div class="search-container">
-      <input type="text" placeholder="Search">
+      <input type="text" placeholder="Search" id="search">
     </div>
-    <div class="grid grid-cols-3 gap-4 mx-auto mt-5" style="width:1200px;">
+    <script>
+      $(document).ready(function () {
+            $('#search').on('keyup', function () {
+                var query = $(this).val();
+
+                if (query.trim().length >= 2) {
+                    $.ajax({
+                        url: "{{ route('search') }}",
+                        type: "GET",
+                        data: { query: query },
+                        success: function (response) {
+                            var results = $('#results');
+                            results.empty();
+                            
+                            $.each(response, function (index, movie) {
+                                var movieItem = $('<div>').addClass('movie-item');
+                                var movieTitle = $('<h3>').text(movie.title);
+                                var movieOverview = $('<p>').text(movie.overview);
+                                var movieLink = $('<a>').attr('href', '/movie/' + movie.id);
+                                var movieImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + movie.poster_path);
+
+                                movieLink.append(movieImage, movieTitle, movieOverview);
+                                movieItem.append(movieLink);
+
+                                if (movie.poster_path != '') {
+                                    results.append(movieItem);
+                                }
+                            
+                            });
+                        }
+                    });
+                }
+
+                if (query.trim().length == 0) {
+                    location.reload();
+                }
+            });
+        });
+    </script>
+    <div class="grid grid-cols-3 gap-4 mx-auto mt-5" style="width:1200px;" id="results">
         @foreach ($movies as $key => $movie)
             <div class="max-w-sm rounded overflow-hidden shadow-lg p-4 w-400">
                 <a href="movie/{{ $movie['id'] }}">
