@@ -62,6 +62,7 @@ class MovieController extends Controller
 
         $auditoriums = Auditorium::select('name')->get();
         $movies = json_decode(self::getMovies(), true);
+        
         $movie_auditorium_map = [];
         foreach($movies['results'] as $key => $movie) {
 

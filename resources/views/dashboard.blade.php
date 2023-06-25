@@ -21,7 +21,8 @@
                             var results = $('#results');
                             results.empty();
                             
-                            $.each(response, function (index, movie) {
+                            if (response.length > 0) {
+                                $.each(response, function (index, movie) {
                                 var movieItem = $('<div>').addClass('movie-item');
                                 var movieTitle = $('<h3>').text(movie.title);
                                 var movieOverview = $('<p>').text(movie.overview);
@@ -31,11 +32,16 @@
                                 movieLink.append(movieImage, movieTitle, movieOverview);
                                 movieItem.append(movieLink);
 
-                                if (movie.poster_path != '') {
+                                if (movie.poster_path != null) {
                                     results.append(movieItem);
                                 }
                             
                             });
+                            } else {
+                                var noMoviesFound = $('<h1>').text("No movies found");
+                                results.append(noMoviesFound);
+                            }
+
                         }
                     });
                 }

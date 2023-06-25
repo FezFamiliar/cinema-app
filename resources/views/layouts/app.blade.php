@@ -13,10 +13,9 @@
         <script src="https://unpkg.com/vue@next"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <!-- Scripts -->
-        <link href="{{ asset('build/assets/app-d8bd0fe6.css') }}" rel="stylesheet">
 
-        <script src="{{ asset('build/assets/app-ada28613.js') }}"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">

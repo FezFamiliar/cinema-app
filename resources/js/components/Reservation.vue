@@ -20,7 +20,11 @@
             <tbody>
                 <tr v-for="i in this.seats.nr_rows" :key="i">
                     <td v-for="j in this.seats.columns" :key="j">
-                        <Seat :row="i" :col="j.column" :isReserved="checkIfSeatIsTaken(i, j.column)" @click="startReservation(i, j.column)" />  
+                        <Seat 
+                        :row="i" 
+                        :col="j.column" 
+                        :isReserved="checkIfSeatIsTaken(i, j.column)" 
+                        @click="startReservation(i, j.column)" />  
                     </td>
                 </tr>
             </tbody>
@@ -90,7 +94,7 @@
             },
 
             getAuditoriums() {
-                axios.get("/api/auditoriums/")
+                axios.get("/api/auditoriums")
                 .then(response => {
                     this.auditoriums = response.data
                 })
