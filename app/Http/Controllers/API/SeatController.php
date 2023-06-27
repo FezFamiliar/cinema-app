@@ -22,11 +22,13 @@ class SeatController extends Controller
         $seats = $request->seats;   
         $movieId = $request->movieId;
         $auditorium = $request->auditorium;
+        $timeframe = $request->timeframe;
 
         $reservation = Reservation::firstOrCreate([
             'user_id' => 1,
             'movie_id' => $movieId,
-            'auditorium' => $auditorium
+            'auditorium' => $auditorium,
+            'time' => $timeframe
         ]);
 
         if(!$reservation->wasRecentlyCreated) {

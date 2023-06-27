@@ -29,8 +29,12 @@
                 </tr>
             </tbody>
         </table> 
-        <ReservationTime ref="timeframeRef"></ReservationTime>
-        <button v-if="currentSeats.length > 0" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" @click.prevent="submitReservation">Reserve Seat</button>
+        <div v-if="currentSeats.length > 0" style="display: flex; gap: 50px">
+            <ReservationTime ref="timeframeRef"></ReservationTime>
+            <button  class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" @click.prevent="submitReservation">Reserve Seat</button>
+        </div>
+
+     
         <p v-if="errorMsg">Something went wrong!</p>
         <p v-if="responseMessage">{{ this.responseMessage }}</p>
 
@@ -104,9 +108,6 @@
             },
           
             startReservation(i, j) {
-                this.timeframeSelected = this.$refs.timeframeRef.timeframes[this.$refs.timeframeRef.selectedTime[0]][this.$refs.timeframeRef.selectedTime[1]];
-                
-
                 if (this.checkIfSeatIsTaken(i, j)) {
                     return
                 }
@@ -125,10 +126,20 @@
 
             },
             submitReservation() {
-                
-                axios.post("/api/reserve", {seats: this.currentSeats, movieId: this.movieId, auditorium: this.auditoriums[this.movieId]})
+                this.timeframeSelected = this.$refs.timeframeRef.timeframes[this.$refs.timeframeRef.selectedTime[0]][this.$refs.timeframeRef.selectedTime[1]];
+                axios.post("/api/reserve", 
+                {   seats: this.currentSeats, 
+                    movieId: this.movieId, 
+                    auditorium: this.auditoriums[this.movieId],
+                    timeframe: this.timeframeSelected
+                })
                 .then(response => {
                     this.responseMessage = response.data.message
+
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+
                 }).catch(error => {
                     this.errorMsg = 'something went wrong'
                 })

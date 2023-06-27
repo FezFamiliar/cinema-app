@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('movie_id');
             $table->string('auditorium');
+            $table->string('time')->nullable();
             $table->timestamps();
         });
     }
